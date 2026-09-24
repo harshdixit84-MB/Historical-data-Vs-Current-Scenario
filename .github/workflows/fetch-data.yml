@@ -27,10 +27,17 @@ jobs:
       - name: Fetch data
         run: python scripts/fetch_nifty_data.py
 
+      - name: Recompute cycle analysis
+        run: |
+          python scripts/detect_cycles.py
+          python scripts/sector_leadership.py
+          python scripts/cycle_comparator.py
+          python scripts/export_price_series.py
+
       - name: Commit and push updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
-          git diff --cached --quiet || git commit -m "Update Nifty & sector data [automated]"
+          git diff --cached --quiet || git commit -m "Update Nifty data & cycle analysis [automated]"
           git push

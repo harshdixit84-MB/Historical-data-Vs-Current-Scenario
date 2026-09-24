@@ -1,0 +1,62 @@
+{
+  "current_snapshot": {
+    "month": "2026-09-30",
+    "RSI6": 40.21,
+    "RSI14": 48.59,
+    "MACD_hist_pct": -1.43,
+    "Price_vs_MAlong_pct": -3.23,
+    "pct_off_high": -10.52,
+    "pct_above_low": 4.99
+  },
+  "nearest_analogs": [
+    {
+      "rank": 1,
+      "phase_id": 5,
+      "type": "Bull",
+      "start_month": "2011-12-31",
+      "distance": 1.146,
+      "followed_by_type": "Bull",
+      "followed_by_duration_months": 38,
+      "followed_by_pct_move": 91.26,
+      "followed_by_end_month": "2015-02-28"
+    },
+    {
+      "rank": 2,
+      "phase_id": 7,
+      "type": "Bull",
+      "start_month": "2016-02-29",
+      "distance": 1.41,
+      "followed_by_type": "Bull",
+      "followed_by_duration_months": 46,
+      "followed_by_pct_move": 74.16,
+      "followed_by_end_month": "2019-12-31"
+    },
+    {
+      "rank": 3,
+      "phase_id": 8,
+      "type": "Bear",
+      "start_month": "2019-12-31",
+      "distance": 1.957,
+      "followed_by_type": "Bear",
+      "followed_by_duration_months": 3,
+      "followed_by_pct_move": -29.34,
+      "followed_by_end_month": "2020-03-31"
+    }
+  ],
+  "current_phase": {
+    "type": "Bull",
+    "start_month": "2020-03-31",
+    "elapsed_months": 68,
+    "elapsed_pct_move": 204.77
+  },
+  "duration_context": {
+    "n": 4,
+    "duration_min": 3,
+    "duration_median": 31.5,
+    "duration_max": 46,
+    "move_min": 22.25,
+    "move_median": 82.71000000000001,
+    "move_max": 122.66,
+    "duration_percentile": 100.0
+  }
+}
