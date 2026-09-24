@@ -46,6 +46,37 @@
   .analog { border-left: 3px solid var(--accent); padding: 8px 12px; margin-bottom: 8px; background: var(--card); border-radius: 0 8px 8px 0; }
   footer { color: var(--muted); font-size: 0.75rem; text-align: center; margin-top: 40px; }
   a { color: var(--accent); }
+
+  .hero-box {
+    background: linear-gradient(145deg, #1a2332, #10151d);
+    border: 1px solid #3d5a80;
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 28px;
+    box-shadow: 0 0 0 1px rgba(61,90,128,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+  .hero-box h2 {
+    border-bottom: 1px solid #3d5a80;
+    color: #fff;
+  }
+  .hero-box .live-price {
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .hero-box .live-price .num { font-size: 2.2rem; font-weight: 700; color: #fff; }
+  .hero-box .live-price .tag {
+    font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .hero-box .live-price .tag.live { background: rgba(63,185,80,0.2); color: var(--bull); }
+  .hero-box .live-price .tag.delayed { background: rgba(139,148,158,0.2); color: var(--muted); }
+  .level-row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(61,90,128,0.35);
+  }
+  .level-row:last-child { border-bottom: none; }
+  .level-row .level-name { font-weight: 600; }
+  .level-row .level-desc { color: var(--muted); font-size: 0.82rem; margin-top: 2px; max-width: 60ch; }
+  .level-row .level-num { font-size: 1.15rem; font-weight: 700; white-space: nowrap; text-align: right; }
 </style>
 </head>
 <body>
@@ -53,18 +84,20 @@
 <h1>Nifty Cycle Study</h1>
 <div class="sub" id="asof">Loading…</div>
 
-<div class="grid" id="statusCards"></div>
-
-<section>
-  <h2>Current Projection</h2>
+<div class="hero-box">
+  <h2 style="margin-top:0">Current Projection</h2>
+  <div id="livePrice" class="live-price"></div>
   <div id="projectionCard"></div>
-  <p class="note">Levels are mechanically derived from the same rules used throughout this study (20% zigzag rule, extension above the 10-month MA at past tops/bottoms) — not a forecast. See note below for sample size.</p>
-</section>
+  <p class="note">These levels are calculated using the same rules as the rest of this study (a 20% drop/rise from the recent peak/trough, and how far price has historically stretched from its 10-month average at past turning points). They are reference points based on history repeating a pattern — not a prediction, and the historical sample is small (see counts below).</p>
+</div>
+
+<div class="grid" id="statusCards"></div>
 
 <section>
   <h2>Nifty 50 — Monthly Close (2007–present)</h2>
   <div class="chart-wrap"><canvas id="priceChart"></canvas></div>
 </section>
+
 
 <section>
   <h2>Nearest Historical Analogs</h2>
@@ -144,34 +177,79 @@ async function init() {
     <span class="badge ${status.current_phase.type.toLowerCase()}">${status.current_phase.type}</span></div>
     <div class="note">${status.current_phase.elapsed_months} months, ${status.current_phase.elapsed_pct_move.toFixed(1)}%</div></div>`;
 
-  // Projection card
+  // Live price (best-effort; falls back honestly to last known close)
+  async function renderLivePrice(fallbackClose, fallbackDate) {
+    const el = document.getElementById('livePrice');
+    try {
+      const res = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?interval=1m&range=1d');
+      if (!res.ok) throw new Error('bad response');
+      const data = await res.json();
+      const meta = data.chart.result[0].meta;
+      const price = meta.regularMarketPrice;
+      const asOf = new Date(meta.regularMarketTime * 1000);
+      el.innerHTML = `<span class="num">${price.toLocaleString(undefined, {maximumFractionDigits: 2})}</span>
+        <span class="tag live">Live-ish, as of ${asOf.toLocaleTimeString()}</span>`;
+    } catch (e) {
+      el.innerHTML = `<span class="num">${fallbackClose.toLocaleString()}</span>
+        <span class="tag delayed">Last daily close (${fallbackDate}) — live quote unavailable right now</span>`;
+    }
+  }
+
+  // Projection card — plain-language level descriptions, no jargon
   const p = status.projection;
   if (p) {
+    renderLivePrice(p.latest_close, p.as_of_date);
     const isBull = p.current_phase_type === 'Bull';
-    let html = `<div class="grid">
-      <div class="card"><div class="label">Latest Close (${p.as_of_date})</div><div class="value">${p.latest_close.toLocaleString()}</div></div>`;
+    const rows = [];
+
     if (isBull) {
-      html += `
-      <div class="card"><div class="label">Running Peak</div><div class="value">${p.running_peak.toLocaleString()}</div><div class="note">${p.running_peak_date}</div></div>
-      <div class="card"><div class="label">Confirmed Bear Trigger</div><div class="value" style="color:var(--bear)">${p.downside_confirmed_bear_level.toLocaleString()}</div><div class="note">${p.downside_confirmed_bear_pct_from_peak}% from peak</div></div>
-      <div class="card"><div class="label">Correction Watch</div><div class="value">${p.downside_correction_watch_level.toLocaleString()}</div><div class="note">${p.downside_correction_watch_pct_from_peak}% from peak</div></div>`;
+      rows.push({
+        name: 'Recent high point', num: p.running_peak.toLocaleString(),
+        desc: `The highest closing price Nifty has reached since the current upward run began (${p.current_phase_start}), hit on ${p.running_peak_date}.`,
+      });
+      rows.push({
+        name: 'Level that would confirm a downturn', num: p.downside_confirmed_bear_level.toLocaleString(), color: 'var(--bear)',
+        desc: `If Nifty falls to this price, it would mean a ${Math.abs(p.downside_confirmed_bear_pct_from_peak)}% drop from the recent high — the point where, by this study's own rule, a "bull market" (rising trend) would officially be relabeled a "bear market" (falling trend).`,
+      });
+      rows.push({
+        name: 'Early warning level', num: p.downside_correction_watch_level.toLocaleString(),
+        desc: `A ${Math.abs(p.downside_correction_watch_pct_from_peak)}% drop from the recent high. Crossing this doesn't confirm a downturn, but it's the point worth paying closer attention.`,
+      });
       if (p.upside_target_zone) {
-        html += `
-      <div class="card"><div class="label">Historical Top Zone</div><div class="value" style="color:var(--bull)">${p.upside_target_zone.low.toLocaleString()}–${p.upside_target_zone.high.toLocaleString()}</div><div class="note">median ${p.upside_target_zone.median.toLocaleString()} · n=${p.historical_top_extension_pct.n_historical_tops} historical tops</div></div>
-      <div class="card"><div class="label">Current vs 10-mo MA</div><div class="value">${p.current_extension_pct_above_ma10}%</div><div class="note">past tops: +${p.historical_top_extension_pct.min}% to +${p.historical_top_extension_pct.max}%</div></div>`;
+        rows.push({
+          name: 'Zone where past rallies have paused or reversed', num: `${p.upside_target_zone.low.toLocaleString()} – ${p.upside_target_zone.high.toLocaleString()}`, color: 'var(--bull)',
+          desc: `Looking at the ${p.historical_top_extension_pct.n_historical_tops} times this market previously reached a peak, price was typically stretched a certain amount above its own 10-month average when that happened. Applying that same stretch to today's average gives this price range.`,
+        });
+        rows.push({
+          name: "Today's stretch vs. its own average", num: `${p.current_extension_pct_above_ma10}%`,
+          desc: `How far today's price sits above (+) or below (−) its own 10-month average price. At past peaks, price was typically ${p.historical_top_extension_pct.min}% to ${p.historical_top_extension_pct.max}% above that average — today's reading is below that range, meaning price doesn't currently look "stretched" the way it usually does right before a top.`,
+        });
       }
     } else {
-      html += `
-      <div class="card"><div class="label">Running Trough</div><div class="value">${p.running_trough.toLocaleString()}</div><div class="note">${p.running_trough_date}</div></div>
-      <div class="card"><div class="label">Confirmed Bull Trigger</div><div class="value" style="color:var(--bull)">${p.upside_confirmed_bull_level.toLocaleString()}</div><div class="note">+${p.upside_confirmed_bull_pct_from_trough}% from trough</div></div>`;
+      rows.push({
+        name: 'Recent low point', num: p.running_trough.toLocaleString(),
+        desc: `The lowest closing price Nifty has reached since the current downward run began (${p.current_phase_start}), hit on ${p.running_trough_date}.`,
+      });
+      rows.push({
+        name: 'Level that would confirm a new upturn', num: p.upside_confirmed_bull_level.toLocaleString(), color: 'var(--bull)',
+        desc: `If Nifty rises to this price, it would mean a ${p.upside_confirmed_bull_pct_from_trough}% recovery from the recent low — the point where this study's rule would relabel this a "bull market" (rising trend).`,
+      });
       if (p.downside_target_zone) {
-        html += `
-      <div class="card"><div class="label">Historical Bottom Zone</div><div class="value" style="color:var(--bear)">${p.downside_target_zone.low.toLocaleString()}–${p.downside_target_zone.high.toLocaleString()}</div><div class="note">median ${p.downside_target_zone.median.toLocaleString()} · n=${p.historical_bottom_extension_pct.n_historical_bottoms} historical bottoms</div></div>`;
+        rows.push({
+          name: 'Zone where past declines have bottomed', num: `${p.downside_target_zone.low.toLocaleString()} – ${p.downside_target_zone.high.toLocaleString()}`, color: 'var(--bear)',
+          desc: `Based on the ${p.historical_bottom_extension_pct.n_historical_bottoms} previous times this market bottomed out, applying the same typical gap below the 10-month average to today's average gives this range.`,
+        });
       }
     }
-    html += `</div>`;
-    document.getElementById('projectionCard').innerHTML = html;
+
+    document.getElementById('projectionCard').innerHTML = rows.map(r => `
+      <div class="level-row">
+        <div><div class="level-name">${r.name}</div><div class="level-desc">${r.desc}</div></div>
+        <div class="level-num" style="${r.color ? 'color:' + r.color : ''}">${r.num}</div>
+      </div>
+    `).join('');
   } else {
+    renderLivePrice(0, '');
     document.getElementById('projectionCard').innerHTML = '<p class="note">No projection data available yet.</p>';
   }
 
