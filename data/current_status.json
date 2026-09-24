@@ -58,5 +58,31 @@
     "move_median": 82.71000000000001,
     "move_max": 122.66,
     "duration_percentile": 100.0
+  },
+  "projection": {
+    "as_of_date": "2026-09-23",
+    "latest_close": 23446.8,
+    "current_phase_type": "Bull",
+    "current_phase_start": "2020-03-31",
+    "current_phase_elapsed_months": 68,
+    "running_peak": 26328.55,
+    "running_peak_date": "2026-01-02",
+    "downside_confirmed_bear_level": 21062.84,
+    "downside_confirmed_bear_pct_from_peak": -20.0,
+    "downside_correction_watch_level": 23695.7,
+    "downside_correction_watch_pct_from_peak": -10.0,
+    "current_ma10": 24228.22,
+    "historical_top_extension_pct": {
+      "min": 4.23,
+      "median": 8.75,
+      "max": 10.05,
+      "n_historical_tops": 3
+    },
+    "upside_target_zone": {
+      "low": 25253.07,
+      "median": 26348.18,
+      "high": 26663.15
+    },
+    "current_extension_pct_above_ma10": -3.23
   }
 }
