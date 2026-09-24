@@ -1,0 +1,166 @@
+{
+  "fetched_at": "2026-09-24T11:58:10.394818Z",
+  "current_month": {
+    "symbol": "NIFTY",
+    "expiry": "29SEP2026",
+    "expiry_index_used": 0,
+    "available_expiries": [
+      "29SEP2026",
+      "06OCT2026",
+      "13OCT2026",
+      "19OCT2026",
+      "27OCT2026",
+      "03NOV2026"
+    ],
+    "spot_price": null,
+    "pcr": 0.73,
+    "bias": "Bearish",
+    "confidence": 56,
+    "max_pain": 23300,
+    "support": [
+      {
+        "strike": 23000,
+        "oi": 12610090,
+        "change_oi": null
+      },
+      {
+        "strike": 22000,
+        "oi": 12204075,
+        "change_oi": null
+      },
+      {
+        "strike": 21000,
+        "oi": 11070865,
+        "change_oi": null
+      },
+      {
+        "strike": 22500,
+        "oi": 8914620,
+        "change_oi": null
+      },
+      {
+        "strike": 23100,
+        "oi": 7675785,
+        "change_oi": null
+      }
+    ],
+    "resistance": [
+      {
+        "strike": 24000,
+        "oi": 19965010,
+        "change_oi": null
+      },
+      {
+        "strike": 23500,
+        "oi": 13650845,
+        "change_oi": null
+      },
+      {
+        "strike": 24500,
+        "oi": 12710750,
+        "change_oi": null
+      },
+      {
+        "strike": 23200,
+        "oi": 12103585,
+        "change_oi": null
+      },
+      {
+        "strike": 23300,
+        "oi": 11797955,
+        "change_oi": null
+      }
+    ],
+    "expected_range": {
+      "low": null,
+      "high": null
+    },
+    "narrative": [
+      "First check for this stock's option chain \u2014 check again later to see how positioning is shifting over time."
+    ],
+    "verdict": "Bearish bias (PCR 0.73). Max Pain sits at 23300.",
+    "is_first_check": true
+  },
+  "next_month": {
+    "symbol": "NIFTY",
+    "expiry": "06OCT2026",
+    "expiry_index_used": 1,
+    "available_expiries": [
+      "29SEP2026",
+      "06OCT2026",
+      "13OCT2026",
+      "19OCT2026",
+      "27OCT2026",
+      "03NOV2026"
+    ],
+    "spot_price": null,
+    "pcr": 0.88,
+    "bias": "Neutral",
+    "confidence": 47,
+    "max_pain": 23250,
+    "support": [
+      {
+        "strike": 23000,
+        "oi": 1458925,
+        "change_oi": null
+      },
+      {
+        "strike": 22500,
+        "oi": 1458145,
+        "change_oi": null
+      },
+      {
+        "strike": 23300,
+        "oi": 1328730,
+        "change_oi": null
+      },
+      {
+        "strike": 21400,
+        "oi": 1251900,
+        "change_oi": null
+      },
+      {
+        "strike": 23200,
+        "oi": 1167985,
+        "change_oi": null
+      }
+    ],
+    "resistance": [
+      {
+        "strike": 23300,
+        "oi": 1851330,
+        "change_oi": null
+      },
+      {
+        "strike": 24000,
+        "oi": 1767740,
+        "change_oi": null
+      },
+      {
+        "strike": 23400,
+        "oi": 1667315,
+        "change_oi": null
+      },
+      {
+        "strike": 23500,
+        "oi": 1659710,
+        "change_oi": null
+      },
+      {
+        "strike": 23200,
+        "oi": 1464515,
+        "change_oi": null
+      }
+    ],
+    "expected_range": {
+      "low": null,
+      "high": null
+    },
+    "narrative": [
+      "First check for this stock's option chain \u2014 check again later to see how positioning is shifting over time."
+    ],
+    "verdict": "Neutral bias (PCR 0.88). Max Pain sits at 23250.",
+    "is_first_check": true
+  },
+  "errors": []
+}
