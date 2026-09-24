@@ -83,6 +83,55 @@
       "median": 26348.18,
       "high": 26663.15
     },
-    "current_extension_pct_above_ma10": -3.23
+    "current_extension_pct_above_ma10": -3.23,
+    "current_ma_short": 23970.27,
+    "short_below_long_ma": true,
+    "ma_cross_date": "2026-03-31",
+    "months_since_ma_cross": 6,
+    "downside_watch_signals": {
+      "price_vs_ma_short_pct": -2.18,
+      "rsi6": 40.21,
+      "macd_hist_pct": -1.43
+    },
+    "downside_confirmation_tiers": [
+      {
+        "tier": 1,
+        "label": "Price below its own short-term (3-month) average",
+        "level": 23970.27,
+        "already_true": true
+      },
+      {
+        "tier": 2,
+        "label": "Price below its own long-term (10-month) average",
+        "level": 24228.22,
+        "already_true": true
+      },
+      {
+        "tier": 3,
+        "label": "20% down from the recent high (full confirmation)",
+        "level": 21062.84,
+        "already_true": false
+      }
+    ],
+    "upside_recovery_tiers": [
+      {
+        "tier": 1,
+        "label": "Price reclaims its short-term (3-month) average",
+        "level": 23970.27,
+        "already_true": false
+      },
+      {
+        "tier": 2,
+        "label": "Price reclaims its long-term (10-month) average",
+        "level": 24228.22,
+        "already_true": false
+      },
+      {
+        "tier": 3,
+        "label": "Price makes a fresh new high above the recent peak",
+        "level": 26328.55,
+        "already_true": false
+      }
+    ]
   }
 }

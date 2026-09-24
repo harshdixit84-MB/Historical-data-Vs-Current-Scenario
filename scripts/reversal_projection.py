@@ -92,6 +92,43 @@ def main():
             result["current_extension_pct_above_ma10"] = round(
                 float((latest_close - current_ma10) / current_ma10 * 100), 2
             )
+
+            # Reversal signals + tiered confirmation zones (downside continuation
+            # and, separately, signs the current correction is ending)
+            current_ma_short = monthly["MA_short"].iloc[-1]
+            regime = monthly["ma_regime"]
+            regime_changes = regime[regime.diff() != 0]
+            last_flip_date = regime_changes.index[-1] if not regime_changes.empty else None
+            months_since_flip = (len(monthly) - 1 - monthly.index.get_loc(last_flip_date)) if last_flip_date is not None else None
+
+            result["current_ma_short"] = round(float(current_ma_short), 2)
+            result["short_below_long_ma"] = bool(current_ma_short < current_ma10)
+            result["ma_cross_date"] = str(last_flip_date.date()) if last_flip_date is not None else None
+            result["months_since_ma_cross"] = int(months_since_flip) if months_since_flip is not None else None
+
+            result["downside_watch_signals"] = {
+                "price_vs_ma_short_pct": round(float((latest_close - current_ma_short) / current_ma_short * 100), 2),
+                "rsi6": round(float(monthly["RSI6"].iloc[-1]), 2) if pd.notna(monthly["RSI6"].iloc[-1]) else None,
+                "macd_hist_pct": round(float(monthly["MACD_hist_pct"].iloc[-1]), 3) if pd.notna(monthly["MACD_hist_pct"].iloc[-1]) else None,
+            }
+
+            result["downside_confirmation_tiers"] = [
+                {"tier": 1, "label": "Price below its own short-term (3-month) average",
+                 "level": round(float(current_ma_short), 2), "already_true": bool(latest_close < current_ma_short)},
+                {"tier": 2, "label": "Price below its own long-term (10-month) average",
+                 "level": round(float(current_ma10), 2), "already_true": bool(latest_close < current_ma10)},
+                {"tier": 3, "label": "20% down from the recent high (full confirmation)",
+                 "level": round(float(bear_confirm_level), 2), "already_true": bool(latest_close < bear_confirm_level)},
+            ]
+
+            result["upside_recovery_tiers"] = [
+                {"tier": 1, "label": "Price reclaims its short-term (3-month) average",
+                 "level": round(float(current_ma_short), 2), "already_true": bool(latest_close > current_ma_short)},
+                {"tier": 2, "label": "Price reclaims its long-term (10-month) average",
+                 "level": round(float(current_ma10), 2), "already_true": bool(latest_close > current_ma10)},
+                {"tier": 3, "label": "Price makes a fresh new high above the recent peak",
+                 "level": round(float(running_peak), 2), "already_true": bool(latest_close > running_peak)},
+            ]
     else:  # Bear phase — mirror logic for downside/bottom projection
         running_trough = since_start["Close"].min()
         running_trough_date = since_start["Close"].idxmin()
