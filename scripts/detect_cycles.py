@@ -67,11 +67,22 @@ def compute_indicators(df):
     rs = avg_gain / avg_loss
     df["RSI14"] = 100 - (100 / (1 + rs))
 
+    # Faster secondary RSI (6-month) — 14-month RSI is too smoothed to catch
+    # reversal extremes on monthly data; a shorter lookback is needed to see
+    # genuine overbought/oversold readings at turning points.
+    avg_gain6 = gain.ewm(alpha=1 / 6, min_periods=6, adjust=False).mean()
+    avg_loss6 = loss.ewm(alpha=1 / 6, min_periods=6, adjust=False).mean()
+    rs6 = avg_gain6 / avg_loss6
+    df["RSI6"] = 100 - (100 / (1 + rs6))
+
     ema12 = df["Close"].ewm(span=12, adjust=False).mean()
     ema26 = df["Close"].ewm(span=26, adjust=False).mean()
     df["MACD"] = ema12 - ema26
     df["MACD_signal"] = df["MACD"].ewm(span=9, adjust=False).mean()
     df["MACD_hist"] = df["MACD"] - df["MACD_signal"]
+    # Normalized so magnitude is comparable across eras where Nifty's price
+    # level itself grew ~15x (raw MACD points aren't comparable 2008 vs 2025).
+    df["MACD_hist_pct"] = df["MACD_hist"] / df["Close"] * 100
 
     df["range_high"] = df["Close"].rolling(RANGE_MONTHS, min_periods=1).max()
     df["range_low"] = df["Close"].rolling(RANGE_MONTHS, min_periods=1).min()
@@ -205,9 +216,11 @@ def build_phases(df, pivots):
             "start_ma3": round(start_row["MA_short"], 2) if pd.notna(start_row["MA_short"]) else None,
             "start_ma10": round(start_row["MA_long"], 2) if pd.notna(start_row["MA_long"]) else None,
             "start_rsi14": round(start_row["RSI14"], 2) if pd.notna(start_row["RSI14"]) else None,
+            "start_rsi6": round(start_row["RSI6"], 2) if pd.notna(start_row["RSI6"]) else None,
             "start_macd": round(start_row["MACD"], 2) if pd.notna(start_row["MACD"]) else None,
             "start_macd_signal": round(start_row["MACD_signal"], 2) if pd.notna(start_row["MACD_signal"]) else None,
             "start_macd_hist": round(start_row["MACD_hist"], 2) if pd.notna(start_row["MACD_hist"]) else None,
+            "start_macd_hist_pct": round(start_row["MACD_hist_pct"], 3) if pd.notna(start_row["MACD_hist_pct"]) else None,
             "start_price_vs_ma10_pct": round(start_row["Price_vs_MAlong_pct"], 2) if pd.notna(start_row["Price_vs_MAlong_pct"]) else None,
             "start_pct_off_12m_high": round(start_row["pct_off_high"], 2) if pd.notna(start_row["pct_off_high"]) else None,
             "start_pct_above_12m_low": round(start_row["pct_above_low"], 2) if pd.notna(start_row["pct_above_low"]) else None,
@@ -242,6 +255,15 @@ def main():
         print(f"{p['phase_id']:<4}{p['type']:<7}{p['num_10pct_subswings']:<5}{p['start_month']:<12}{p['end_month']:<12}"
               f"{p['duration_months']:<5}{p['pct_move']:<9}{str(p['trend_confirmed_month']):<12}{str(p['trend_confirmed_lag_months']):<9}"
               f"{str(p['preceding_ma_cross_month']):<12}{p['preceding_ma_cross_lead_months']}")
+
+    latest = monthly.iloc[-1]
+    print("\n=== Current status (latest closed month) ===")
+    print(f"Month: {monthly.index[-1].date()}  Close: {latest['Close']:.2f}")
+    print(f"RSI14: {latest['RSI14']:.2f}   RSI6: {latest['RSI6']:.2f}")
+    print(f"MACD hist (% of price): {latest['MACD_hist_pct']:.3f}%")
+    print(f"Price vs 10-mo MA: {latest['Price_vs_MAlong_pct']:.2f}%")
+    print(f"Off 12-mo high: {latest['pct_off_high']:.2f}%   Above 12-mo low: {latest['pct_above_low']:.2f}%")
+    print(f"MA regime (3mo>10mo = uptrend): {'Bullish' if latest['ma_regime'] == 1 else 'Bearish'}")
 
 
 if __name__ == "__main__":
