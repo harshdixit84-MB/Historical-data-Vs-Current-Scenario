@@ -32,6 +32,7 @@ jobs:
           python scripts/detect_cycles.py
           python scripts/sector_leadership.py
           python scripts/cycle_comparator.py
+          python scripts/reversal_projection.py
           python scripts/export_price_series.py
 
       - name: Commit and push updated data

@@ -56,6 +56,12 @@
 <div class="grid" id="statusCards"></div>
 
 <section>
+  <h2>Current Projection</h2>
+  <div id="projectionCard"></div>
+  <p class="note">Levels are mechanically derived from the same rules used throughout this study (20% zigzag rule, extension above the 10-month MA at past tops/bottoms) — not a forecast. See note below for sample size.</p>
+</section>
+
+<section>
   <h2>Nifty 50 — Monthly Close (2007–present)</h2>
   <div class="chart-wrap"><canvas id="priceChart"></canvas></div>
 </section>
@@ -137,6 +143,37 @@ async function init() {
   ).join('') + `<div class="card"><div class="label">Current Phase</div><div class="value">
     <span class="badge ${status.current_phase.type.toLowerCase()}">${status.current_phase.type}</span></div>
     <div class="note">${status.current_phase.elapsed_months} months, ${status.current_phase.elapsed_pct_move.toFixed(1)}%</div></div>`;
+
+  // Projection card
+  const p = status.projection;
+  if (p) {
+    const isBull = p.current_phase_type === 'Bull';
+    let html = `<div class="grid">
+      <div class="card"><div class="label">Latest Close (${p.as_of_date})</div><div class="value">${p.latest_close.toLocaleString()}</div></div>`;
+    if (isBull) {
+      html += `
+      <div class="card"><div class="label">Running Peak</div><div class="value">${p.running_peak.toLocaleString()}</div><div class="note">${p.running_peak_date}</div></div>
+      <div class="card"><div class="label">Confirmed Bear Trigger</div><div class="value" style="color:var(--bear)">${p.downside_confirmed_bear_level.toLocaleString()}</div><div class="note">${p.downside_confirmed_bear_pct_from_peak}% from peak</div></div>
+      <div class="card"><div class="label">Correction Watch</div><div class="value">${p.downside_correction_watch_level.toLocaleString()}</div><div class="note">${p.downside_correction_watch_pct_from_peak}% from peak</div></div>`;
+      if (p.upside_target_zone) {
+        html += `
+      <div class="card"><div class="label">Historical Top Zone</div><div class="value" style="color:var(--bull)">${p.upside_target_zone.low.toLocaleString()}–${p.upside_target_zone.high.toLocaleString()}</div><div class="note">median ${p.upside_target_zone.median.toLocaleString()} · n=${p.historical_top_extension_pct.n_historical_tops} historical tops</div></div>
+      <div class="card"><div class="label">Current vs 10-mo MA</div><div class="value">${p.current_extension_pct_above_ma10}%</div><div class="note">past tops: +${p.historical_top_extension_pct.min}% to +${p.historical_top_extension_pct.max}%</div></div>`;
+      }
+    } else {
+      html += `
+      <div class="card"><div class="label">Running Trough</div><div class="value">${p.running_trough.toLocaleString()}</div><div class="note">${p.running_trough_date}</div></div>
+      <div class="card"><div class="label">Confirmed Bull Trigger</div><div class="value" style="color:var(--bull)">${p.upside_confirmed_bull_level.toLocaleString()}</div><div class="note">+${p.upside_confirmed_bull_pct_from_trough}% from trough</div></div>`;
+      if (p.downside_target_zone) {
+        html += `
+      <div class="card"><div class="label">Historical Bottom Zone</div><div class="value" style="color:var(--bear)">${p.downside_target_zone.low.toLocaleString()}–${p.downside_target_zone.high.toLocaleString()}</div><div class="note">median ${p.downside_target_zone.median.toLocaleString()} · n=${p.historical_bottom_extension_pct.n_historical_bottoms} historical bottoms</div></div>`;
+      }
+    }
+    html += `</div>`;
+    document.getElementById('projectionCard').innerHTML = html;
+  } else {
+    document.getElementById('projectionCard').innerHTML = '<p class="note">No projection data available yet.</p>';
+  }
 
   // Price chart
   new Chart(document.getElementById('priceChart'), {
