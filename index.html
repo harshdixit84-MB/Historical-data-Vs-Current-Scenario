@@ -8,9 +8,9 @@
   onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js';document.head.appendChild(s);"></script>
 <style>
   :root {
-    --bg: #0d1117; --card: #161b22; --border: #30363d;
-    --text: #e6edf3; --muted: #8b949e;
-    --bull: #3fb950; --bear: #f85149; --accent: #58a6ff;
+    --bg: #ffffff; --card: #f6f8fa; --border: #d0d7de;
+    --text: #1f2328; --muted: #57606a;
+    --bull: #1a7f37; --bear: #cf222e; --accent: #0969da;
   }
   * { box-sizing: border-box; }
   body {
@@ -30,8 +30,8 @@
   .badge {
     display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600;
   }
-  .badge.bull { background: rgba(63,185,80,0.15); color: var(--bull); }
-  .badge.bear { background: rgba(248,81,73,0.15); color: var(--bear); }
+  .badge.bull { background: rgba(26,127,55,0.12); color: var(--bull); }
+  .badge.bear { background: rgba(207,34,46,0.12); color: var(--bear); }
   section { margin-bottom: 32px; }
   section h2 { font-size: 1.05rem; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
   table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
@@ -48,30 +48,30 @@
   a { color: var(--accent); }
 
   .hero-box {
-    background: linear-gradient(145deg, #1a2332, #10151d);
-    border: 1px solid #3d5a80;
+    background: linear-gradient(145deg, #eef4fb, #f7fafd);
+    border: 1px solid #b6cbe8;
     border-radius: 14px;
     padding: 20px 22px;
     margin-bottom: 28px;
-    box-shadow: 0 0 0 1px rgba(61,90,128,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    box-shadow: 0 0 0 1px rgba(182,203,232,0.4), 0 4px 14px rgba(15,40,80,0.08);
   }
   .hero-box h2 {
-    border-bottom: 1px solid #3d5a80;
-    color: #fff;
+    border-bottom: 1px solid #b6cbe8;
+    color: var(--text);
   }
   .hero-box .live-price {
     display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
     margin-bottom: 16px;
   }
-  .hero-box .live-price .num { font-size: 2.2rem; font-weight: 700; color: #fff; }
+  .hero-box .live-price .num { font-size: 2.2rem; font-weight: 700; color: var(--text); }
   .hero-box .live-price .tag {
     font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em;
   }
-  .hero-box .live-price .tag.live { background: rgba(63,185,80,0.2); color: var(--bull); }
-  .hero-box .live-price .tag.delayed { background: rgba(139,148,158,0.2); color: var(--muted); }
+  .hero-box .live-price .tag.live { background: rgba(26,127,55,0.15); color: var(--bull); }
+  .hero-box .live-price .tag.delayed { background: rgba(87,96,106,0.15); color: var(--muted); }
   .level-row {
     display: flex; justify-content: space-between; align-items: flex-start;
-    gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(61,90,128,0.35);
+    gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(182,203,232,0.6);
   }
   .level-row:last-child { border-bottom: none; }
   .level-row .level-name { font-weight: 600; }
@@ -82,8 +82,8 @@
     display: flex; align-items: center; gap: 10px; padding: 8px 10px; margin-bottom: 6px;
     border-radius: 8px; border: 1px solid var(--border); font-size: 0.85rem;
   }
-  .tier-row.active { border-color: var(--bear); background: rgba(248,81,73,0.08); }
-  .tier-row.active.up { border-color: var(--bull); background: rgba(63,185,80,0.08); }
+  .tier-row.active { border-color: var(--bear); background: rgba(207,34,46,0.07); }
+  .tier-row.active.up { border-color: var(--bull); background: rgba(26,127,55,0.07); }
   .tier-num {
     flex: none; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
     font-size: 0.75rem; font-weight: 700; background: var(--border); color: var(--text);
@@ -103,8 +103,8 @@
   .oc-cols h4 { margin: 0 0 4px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
   @media (max-width: 600px) { .oc-cols { grid-template-columns: 1fr; } }
 
-  #signalBox.signal-bearish { border-color: var(--bear); box-shadow: 0 0 0 1px rgba(248,81,73,0.3), 0 8px 24px rgba(0,0,0,0.35); }
-  #signalBox.signal-bullish { border-color: var(--bull); box-shadow: 0 0 0 1px rgba(63,185,80,0.3), 0 8px 24px rgba(0,0,0,0.35); }
+  #signalBox.signal-bearish { border-color: var(--bear); box-shadow: 0 0 0 1px rgba(207,34,46,0.3), 0 4px 14px rgba(15,40,80,0.08); }
+  #signalBox.signal-bullish { border-color: var(--bull); box-shadow: 0 0 0 1px rgba(26,127,55,0.3), 0 4px 14px rgba(15,40,80,0.08); }
   .signal-headline { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
   .signal-headline.bearish { color: var(--bear); }
   .signal-headline.bullish { color: var(--bull); }
@@ -114,9 +114,9 @@
   .buy-badge {
     display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px;
     font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;
-    background: var(--bull); color: #06240f; vertical-align: middle;
+    background: var(--bull); color: #ffffff; vertical-align: middle;
   }
-  tr.recommended-row { background: rgba(63,185,80,0.08); }
+  tr.recommended-row { background: rgba(26,127,55,0.09); }
 </style>
 </head>
 <body>
@@ -335,7 +335,7 @@ async function init() {
 
     if (p.downside_watch_signals) {
       const w = p.downside_watch_signals;
-      html += `<div class="level-row" style="border-top:1px solid rgba(61,90,128,0.5);padding-top:14px;margin-top:6px;">
+      html += `<div class="level-row" style="border-top:1px solid rgba(182,203,232,0.7);padding-top:14px;margin-top:6px;">
         <div><div class="level-name">Signs worth watching right now</div>
         <div class="level-desc">The 6-month momentum reading (RSI) is at ${w.rsi6} — readings above ~70 have historically lined up with past tops, and below ~25-30 with past bottoms; today's reading is neither. Price momentum (MACD) is at ${w.macd_hist_pct}%, meaning it's currently negative — a sign the recent trend has been losing strength, not gaining it. Price is also ${w.price_vs_ma_short_pct}% away from its own short-term (3-month) average.</div></div>
       </div>`;
@@ -449,14 +449,14 @@ async function init() {
     type: 'line',
     data: {
       labels: priceSeries.map(p => p.month),
-      datasets: [{ data: priceSeries.map(p => p.close), borderColor: '#58a6ff', pointRadius: 0, borderWidth: 1.5 }],
+      datasets: [{ data: priceSeries.map(p => p.close), borderColor: '#0969da', pointRadius: 0, borderWidth: 1.5 }],
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        x: { ticks: { maxTicksLimit: 10, color: '#8b949e' }, grid: { color: '#30363d' } },
-        y: { ticks: { color: '#8b949e' }, grid: { color: '#30363d' } },
+        x: { ticks: { maxTicksLimit: 10, color: '#57606a' }, grid: { color: '#d0d7de' } },
+        y: { ticks: { color: '#57606a' }, grid: { color: '#d0d7de' } },
       },
     },
   });
@@ -537,7 +537,7 @@ async function init() {
 }
 
 init().catch(err => {
-  document.body.innerHTML = '<p style="color:#f85149">Failed to load dashboard data: ' + err.message + '</p>';
+  document.body.innerHTML = '<p style="color:#cf222e">Failed to load dashboard data: ' + err.message + '</p>';
 });
 </script>
 </body>
