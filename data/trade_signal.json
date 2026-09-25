@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T03:08:54.222052Z",
+  "generated_at": "2026-09-25T06:54:11.036884+00:00",
   "spot_reference": 23063.1,
   "spot_reference_note": "Last available daily close (not intraday) \u2014 see project notes.",
   "price_side": {
@@ -15,19 +15,19 @@
     "expiry": "29SEP2026",
     "days_to_expiry": 4,
     "high_decay_risk": false,
-    "pcr": 0.72,
-    "option_chain_bias": "Bearish",
-    "option_chain_confidence": 57,
-    "max_pain": 23300,
+    "pcr": 0.85,
+    "option_chain_bias": "Neutral",
+    "option_chain_confidence": 49,
+    "max_pain": 23200,
     "candidate_pe_strike": {
-      "strike": 23000,
-      "oi": 11757550,
-      "change_oi": -852540
+      "strike": 23050,
+      "oi": 11256765,
+      "change_oi": 8465925
     },
     "candidate_ce_strike": {
-      "strike": 23200,
-      "oi": 11949275,
-      "change_oi": -154310
+      "strike": 23100,
+      "oi": 18963295,
+      "change_oi": 11893635
     }
   },
   "next_month": {
@@ -42,21 +42,18 @@
     "max_pain": 23500,
     "candidate_pe_strike": {
       "strike": 23000,
-      "oi": 4462250,
-      "change_oi": -520
+      "oi": 4853225,
+      "change_oi": 390975
     },
     "candidate_ce_strike": {
       "strike": 23300,
-      "oi": 2466100,
-      "change_oi": -86060
+      "oi": 2625545,
+      "change_oi": 159445
     }
   },
   "primary_expiry_used": "Current month",
   "signal": {
-    "signal": "Bearish",
-    "instrument": "PE",
-    "strike": 23000,
-    "strike_oi": 11757550,
-    "reason": "Price trend and today's option-chain positioning both lean Bearish for the Current month (29SEP2026) contract."
+    "signal": "No clear trade",
+    "reason": "Price-trend signal is Bearish and option-chain signal is Neutral \u2014 at least one side isn't showing a clear lean, so the two aren't confirming each other."
   }
 }
