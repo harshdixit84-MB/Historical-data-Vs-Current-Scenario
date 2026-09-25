@@ -93,6 +93,15 @@
   .tier-status { margin-left: auto; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); white-space: nowrap; }
   .tier-row.active .tier-status { color: var(--bear); font-weight: 600; }
   .tier-row.active.up .tier-status { color: var(--bull); font-weight: 600; }
+
+  .oc-expiry { border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; }
+  .oc-expiry h3 { margin: 0 0 8px; font-size: 0.95rem; }
+  .oc-stats { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 10px; font-size: 0.85rem; }
+  .oc-stats .pill { background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px; }
+  .oc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .oc-cols table { font-size: 0.8rem; }
+  .oc-cols h4 { margin: 0 0 4px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+  @media (max-width: 600px) { .oc-cols { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -124,6 +133,11 @@
 <section>
   <h2>Current Phase vs. History</h2>
   <div id="durationContext"></div>
+</section>
+
+<section>
+  <h2>Option Chain — Quick Read</h2>
+  <div id="optionChain"></div>
 </section>
 
 <section>
@@ -167,14 +181,60 @@ async function loadJSON(path) {
   return res.json();
 }
 
+async function loadJSONOptional(path) {
+  try { return await loadJSON(path); } catch (e) { return null; }
+}
+
+function renderOptionChain(oc) {
+  const el = document.getElementById('optionChain');
+  if (!oc || (!oc.current_month && !oc.next_month)) {
+    el.innerHTML = '<p class="note">Option chain data not available yet.</p>';
+    return;
+  }
+
+  const biasColor = b => b === 'Bearish' ? 'var(--bear)' : b === 'Bullish' ? 'var(--bull)' : 'var(--muted)';
+
+  function renderExpiry(label, data) {
+    if (!data) return `<div class="oc-expiry"><h3>${label}</h3><p class="note">Not available.</p></div>`;
+    const rowsFor = list => list.map(s => `<tr><td>${s.strike}</td><td>${(s.oi / 100000).toFixed(1)}L</td></tr>`).join('');
+    return `
+      <div class="oc-expiry">
+        <h3>${label} — expiry ${data.expiry}</h3>
+        <div class="oc-stats">
+          <span class="pill">PCR: ${data.pcr}</span>
+          <span class="pill" style="color:${biasColor(data.bias)}">Bias: ${data.bias} (confidence ${data.confidence})</span>
+          <span class="pill">Max Pain: ${data.max_pain}</span>
+        </div>
+        <div class="oc-cols">
+          <div>
+            <h4>Support (Put OI)</h4>
+            <table><thead><tr><th>Strike</th><th>OI</th></tr></thead><tbody>${rowsFor(data.support)}</tbody></table>
+          </div>
+          <div>
+            <h4>Resistance (Call OI)</h4>
+            <table><thead><tr><th>Strike</th><th>OI</th></tr></thead><tbody>${rowsFor(data.resistance)}</tbody></table>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  el.innerHTML =
+    renderExpiry('Current month', oc.current_month) +
+    renderExpiry('Next month', oc.next_month) +
+    `<p class="note">Fetched ${new Date(oc.fetched_at).toLocaleString()}. PCR and Max Pain are informational, not predictive — high open-interest strikes tend to act as rough support/resistance, especially near expiry. Not financial advice.</p>`;
+}
+
 async function init() {
   await waitForChart(8000);
-  const [status, cycles, sectors, priceSeries] = await Promise.all([
+  const [status, cycles, sectors, priceSeries, optionChain] = await Promise.all([
     loadJSON('data/current_status.json'),
     loadJSON('data/cycles_monthly.json'),
     loadJSON('data/sector_leadership.json'),
     loadJSON('data/nifty_monthly_close.json'),
+    loadJSONOptional('data/option_chain.json'),
   ]);
+
+  renderOptionChain(optionChain);
 
   document.getElementById('asof').textContent = 'As of ' + status.current_snapshot.month;
 
