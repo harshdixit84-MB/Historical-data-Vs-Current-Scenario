@@ -102,6 +102,15 @@
   .oc-cols table { font-size: 0.8rem; }
   .oc-cols h4 { margin: 0 0 4px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
   @media (max-width: 600px) { .oc-cols { grid-template-columns: 1fr; } }
+
+  #signalBox.signal-bearish { border-color: var(--bear); box-shadow: 0 0 0 1px rgba(248,81,73,0.3), 0 8px 24px rgba(0,0,0,0.35); }
+  #signalBox.signal-bullish { border-color: var(--bull); box-shadow: 0 0 0 1px rgba(63,185,80,0.3), 0 8px 24px rgba(0,0,0,0.35); }
+  .signal-headline { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+  .signal-headline.bearish { color: var(--bear); }
+  .signal-headline.bullish { color: var(--bull); }
+  .signal-headline.neutral { color: var(--muted); }
+  .signal-detail { display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; margin: 10px 0; }
+  .signal-detail .item { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; }
 </style>
 </head>
 <body>
@@ -114,6 +123,17 @@
   <div id="livePrice" class="live-price"></div>
   <div id="projectionCard"></div>
   <p class="note">These levels are calculated using the same rules as the rest of this study (a 20% drop/rise from the recent peak/trough, and how far price has historically stretched from its 10-month average at past turning points). They are reference points based on history repeating a pattern — not a prediction, and the historical sample is small (see counts below).</p>
+</div>
+
+<div class="hero-box" id="signalBox">
+  <h2 style="margin-top:0">Trade Signal</h2>
+  <div id="tradeSignal"></div>
+</div>
+
+<div class="hero-box">
+  <h2 style="margin-top:0">Option Chain — Quick Read</h2>
+  <div id="optionChainMeta" class="note" style="margin-bottom:10px;"></div>
+  <div id="optionChain"></div>
 </div>
 
 <div class="grid" id="statusCards"></div>
@@ -133,11 +153,6 @@
 <section>
   <h2>Current Phase vs. History</h2>
   <div id="durationContext"></div>
-</section>
-
-<section>
-  <h2>Option Chain — Quick Read</h2>
-  <div id="optionChain"></div>
 </section>
 
 <section>
@@ -185,12 +200,50 @@ async function loadJSONOptional(path) {
   try { return await loadJSON(path); } catch (e) { return null; }
 }
 
+function renderTradeSignal(sig) {
+  const box = document.getElementById('signalBox');
+  const el = document.getElementById('tradeSignal');
+  if (!sig || !sig.signal) {
+    box.className = 'hero-box';
+    el.innerHTML = '<p class="note">Signal not available yet.</p>';
+    return;
+  }
+
+  const s = sig.signal;
+  let headlineClass = 'neutral', headline = '';
+
+  if (s.signal === 'Bearish' || s.signal === 'Bullish') {
+    headlineClass = s.signal.toLowerCase();
+    box.className = 'hero-box signal-' + headlineClass;
+    headline = `${s.signal} — Consider ${s.instrument} ${s.strike ? s.strike.toLocaleString() : ''}`;
+  } else {
+    box.className = 'hero-box';
+    headline = s.signal;
+  }
+
+  const p = sig.price_side;
+  let html = `<div class="signal-headline ${headlineClass}">${headline}</div>`;
+  html += `<p class="level-desc">${s.reason}</p>`;
+  html += `<div class="signal-detail">
+    <div class="item">Price trend: <strong>${p.lean}</strong> (${p.downside_tiers_active}/${p.downside_tiers_total} downside, ${p.upside_tiers_active}/${p.upside_tiers_total} upside tiers active)</div>
+    <div class="item">Using: <strong>${sig.primary_expiry_used || '—'}</strong></div>
+  </div>`;
+  if (s.strike_oi) {
+    html += `<p class="note">Strike chosen for liquidity: highest open interest at-or-near spot on the ${s.instrument === 'PE' ? 'support' : 'resistance'} side (OI: ${(s.strike_oi / 100000).toFixed(1)}L).</p>`;
+  }
+  html += `<p class="note">Mechanical rule-based output only (price trend must agree with today's option-chain bias) — not personal financial advice. Spot reference: ${sig.spot_reference ? sig.spot_reference.toLocaleString() : '—'} (${sig.spot_reference_note}). Generated ${new Date(sig.generated_at).toLocaleString()}.</p>`;
+
+  el.innerHTML = html;
+}
+
 function renderOptionChain(oc) {
   const el = document.getElementById('optionChain');
+  const meta = document.getElementById('optionChainMeta');
   if (!oc || (!oc.current_month && !oc.next_month)) {
     el.innerHTML = '<p class="note">Option chain data not available yet.</p>';
     return;
   }
+  meta.textContent = `Last refreshed: ${new Date(oc.fetched_at).toLocaleString()} · refreshes every 30 min on weekdays during market hours`;
 
   const biasColor = b => b === 'Bearish' ? 'var(--bear)' : b === 'Bullish' ? 'var(--bull)' : 'var(--muted)';
 
@@ -221,20 +274,22 @@ function renderOptionChain(oc) {
   el.innerHTML =
     renderExpiry('Current month', oc.current_month) +
     renderExpiry('Next month', oc.next_month) +
-    `<p class="note">Fetched ${new Date(oc.fetched_at).toLocaleString()}. PCR and Max Pain are informational, not predictive — high open-interest strikes tend to act as rough support/resistance, especially near expiry. Not financial advice.</p>`;
+    `<p class="note">PCR and Max Pain are informational, not predictive — high open-interest strikes tend to act as rough support/resistance, especially near expiry. Not financial advice.</p>`;
 }
 
 async function init() {
   await waitForChart(8000);
-  const [status, cycles, sectors, priceSeries, optionChain] = await Promise.all([
+  const [status, cycles, sectors, priceSeries, optionChain, tradeSignal] = await Promise.all([
     loadJSON('data/current_status.json'),
     loadJSON('data/cycles_monthly.json'),
     loadJSON('data/sector_leadership.json'),
     loadJSON('data/nifty_monthly_close.json'),
     loadJSONOptional('data/option_chain.json'),
+    loadJSONOptional('data/trade_signal.json'),
   ]);
 
   renderOptionChain(optionChain);
+  renderTradeSignal(tradeSignal);
 
   document.getElementById('asof').textContent = 'As of ' + status.current_snapshot.month;
 

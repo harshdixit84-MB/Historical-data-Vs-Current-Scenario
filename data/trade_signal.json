@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-09-25T03:08:54.222052Z",
+  "spot_reference": 23063.1,
+  "spot_reference_note": "Last available daily close (not intraday) \u2014 see project notes.",
+  "price_side": {
+    "lean": "Bearish",
+    "downside_tiers_active": 2,
+    "downside_tiers_total": 3,
+    "upside_tiers_active": 0,
+    "upside_tiers_total": 3
+  },
+  "current_month": {
+    "label": "Current month",
+    "available": true,
+    "expiry": "29SEP2026",
+    "days_to_expiry": 4,
+    "high_decay_risk": false,
+    "pcr": 0.72,
+    "option_chain_bias": "Bearish",
+    "option_chain_confidence": 57,
+    "max_pain": 23300,
+    "candidate_pe_strike": {
+      "strike": 23000,
+      "oi": 11757550,
+      "change_oi": -852540
+    },
+    "candidate_ce_strike": {
+      "strike": 23200,
+      "oi": 11949275,
+      "change_oi": -154310
+    }
+  },
+  "next_month": {
+    "label": "Next month",
+    "available": true,
+    "expiry": "27OCT2026",
+    "days_to_expiry": 32,
+    "high_decay_risk": false,
+    "pcr": 1.07,
+    "option_chain_bias": "Neutral",
+    "option_chain_confidence": 44,
+    "max_pain": 23500,
+    "candidate_pe_strike": {
+      "strike": 23000,
+      "oi": 4462250,
+      "change_oi": -520
+    },
+    "candidate_ce_strike": {
+      "strike": 23300,
+      "oi": 2466100,
+      "change_oi": -86060
+    }
+  },
+  "primary_expiry_used": "Current month",
+  "signal": {
+    "signal": "Bearish",
+    "instrument": "PE",
+    "strike": 23000,
+    "strike_oi": 11757550,
+    "reason": "Price trend and today's option-chain positioning both lean Bearish for the Current month (29SEP2026) contract."
+  }
+}

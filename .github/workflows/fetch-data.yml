@@ -39,6 +39,10 @@ jobs:
         run: python scripts/fetch_option_chain.py
         continue-on-error: true  # option chain depends on an external broker session; don't fail the whole daily run if it's temporarily down
 
+      - name: Generate trade signal
+        run: python scripts/generate_signal.py
+        continue-on-error: true
+
       - name: Commit and push updated data
         run: |
           git config user.name "github-actions[bot]"
