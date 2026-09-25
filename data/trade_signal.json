@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-25T12:34:20.058206+00:00",
-  "spot_reference": 23063.1,
+  "generated_at": "2026-09-25T15:47:19.123116+00:00",
+  "spot_reference": 23140.5,
   "spot_reference_note": "Last available daily close (not intraday) \u2014 see project notes.",
   "price_side": {
     "lean": "Bearish",
@@ -20,14 +20,14 @@
     "option_chain_confidence": 45,
     "max_pain": 23250,
     "candidate_pe_strike": {
-      "strike": 23000,
-      "oi": 14607435,
-      "change_oi": -6351090
+      "strike": 23100,
+      "oi": 11453000,
+      "change_oi": 0
     },
     "candidate_ce_strike": {
       "strike": 23300,
       "oi": 9901905,
-      "change_oi": -5818670
+      "change_oi": 0
     }
   },
   "next_month": {
@@ -43,12 +43,12 @@
     "candidate_pe_strike": {
       "strike": 23000,
       "oi": 4789785,
-      "change_oi": -63440
+      "change_oi": 0
     },
     "candidate_ce_strike": {
       "strike": 23300,
       "oi": 2713880,
-      "change_oi": 88335
+      "change_oi": 0
     }
   },
   "primary_expiry_used": "Current month",

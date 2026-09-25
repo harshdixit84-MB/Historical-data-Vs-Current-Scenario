@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-25T12:33:43.800639Z",
+  "fetched_at": "2026-09-25T15:46:48.840034Z",
   "current_month": {
     "symbol": "NIFTY",
     "expiry": "29SEP2026",
@@ -21,54 +21,54 @@
       {
         "strike": 23000,
         "oi": 14607435,
-        "change_oi": -6351090
+        "change_oi": 0
       },
       {
         "strike": 22000,
         "oi": 13081770,
-        "change_oi": -722800
+        "change_oi": 0
       },
       {
         "strike": 23100,
         "oi": 11453000,
-        "change_oi": -7044570
+        "change_oi": 0
       },
       {
         "strike": 22500,
         "oi": 10488790,
-        "change_oi": -94575
+        "change_oi": 0
       },
       {
         "strike": 21000,
         "oi": 9586785,
-        "change_oi": -986830
+        "change_oi": 0
       }
     ],
     "resistance": [
       {
         "strike": 24000,
         "oi": 15844010,
-        "change_oi": -1386775
+        "change_oi": 0
       },
       {
         "strike": 23500,
         "oi": 14624220,
-        "change_oi": -2244385
+        "change_oi": 0
       },
       {
         "strike": 24500,
         "oi": 10737545,
-        "change_oi": -714870
+        "change_oi": 0
       },
       {
         "strike": 23400,
         "oi": 10038405,
-        "change_oi": -2565875
+        "change_oi": 0
       },
       {
         "strike": 23300,
         "oi": 9901905,
-        "change_oi": -5818670
+        "change_oi": 0
       }
     ],
     "expected_range": {
@@ -76,8 +76,7 @@
       "high": null
     },
     "narrative": [
-      "Put unwinding at 23000 \u2014 support weakening.",
-      "Call OI decreasing at 24000 \u2014 resistance weakening."
+      "No significant OI shift detected since the last check."
     ],
     "verdict": "Neutral bias (PCR 0.92). Max Pain sits at 23250.",
     "is_first_check": false
@@ -103,54 +102,54 @@
       {
         "strike": 23500,
         "oi": 5994755,
-        "change_oi": 50180
+        "change_oi": 0
       },
       {
         "strike": 23000,
         "oi": 4789785,
-        "change_oi": -63440
+        "change_oi": 0
       },
       {
         "strike": 22500,
         "oi": 3269760,
-        "change_oi": 84890
+        "change_oi": 0
       },
       {
         "strike": 23300,
         "oi": 2859740,
-        "change_oi": 79300
+        "change_oi": 0
       },
       {
         "strike": 24000,
         "oi": 2532400,
-        "change_oi": 284895
+        "change_oi": 0
       }
     ],
     "resistance": [
       {
         "strike": 23500,
         "oi": 6185010,
-        "change_oi": 214305
+        "change_oi": 0
       },
       {
         "strike": 24000,
         "oi": 5240885,
-        "change_oi": 394355
+        "change_oi": 0
       },
       {
         "strike": 24500,
         "oi": 2737670,
-        "change_oi": 126555
+        "change_oi": 0
       },
       {
         "strike": 23300,
         "oi": 2713880,
-        "change_oi": 88335
+        "change_oi": 0
       },
       {
         "strike": 25000,
         "oi": 2462330,
-        "change_oi": 87035
+        "change_oi": 0
       }
     ],
     "expected_range": {
@@ -158,8 +157,7 @@
       "high": null
     },
     "narrative": [
-      "Heavy Put writing at 23500 \u2014 support strengthening.",
-      "Call writers defending 23500."
+      "No significant OI shift detected since the last check."
     ],
     "verdict": "Neutral bias (PCR 1.09). Max Pain sits at 23500.",
     "is_first_check": false
