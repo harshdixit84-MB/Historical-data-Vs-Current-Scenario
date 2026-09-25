@@ -111,6 +111,12 @@
   .signal-headline.neutral { color: var(--muted); }
   .signal-detail { display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; margin: 10px 0; }
   .signal-detail .item { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; }
+  .buy-badge {
+    display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px;
+    font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;
+    background: var(--bull); color: #06240f; vertical-align: middle;
+  }
+  tr.recommended-row { background: rgba(63,185,80,0.08); }
 </style>
 </head>
 <body>
@@ -236,7 +242,7 @@ function renderTradeSignal(sig) {
   el.innerHTML = html;
 }
 
-function renderOptionChain(oc) {
+function renderOptionChain(oc, sig) {
   const el = document.getElementById('optionChain');
   const meta = document.getElementById('optionChainMeta');
   if (!oc || (!oc.current_month && !oc.next_month)) {
@@ -247,9 +253,23 @@ function renderOptionChain(oc) {
 
   const biasColor = b => b === 'Bearish' ? 'var(--bear)' : b === 'Bullish' ? 'var(--bull)' : 'var(--muted)';
 
+  // Figure out which single strike (if any) currently carries a buy recommendation
+  let recommended = null; // { label: 'Current month'|'Next month', side: 'support'|'resistance', strike: number }
+  if (sig && sig.signal && (sig.signal.signal === 'Bearish' || sig.signal.signal === 'Bullish') && sig.signal.strike) {
+    recommended = {
+      label: sig.primary_expiry_used,
+      side: sig.signal.instrument === 'PE' ? 'support' : 'resistance',
+      strike: sig.signal.strike,
+    };
+  }
+
   function renderExpiry(label, data) {
     if (!data) return `<div class="oc-expiry"><h3>${label}</h3><p class="note">Not available.</p></div>`;
-    const rowsFor = list => list.map(s => `<tr><td>${s.strike}</td><td>${(s.oi / 100000).toFixed(1)}L</td></tr>`).join('');
+    const rowsFor = (list, side) => list.map(s => {
+      const isRec = recommended && recommended.label === label && recommended.side === side && recommended.strike === s.strike;
+      const badge = isRec ? `<span class="buy-badge">Buy</span>` : '';
+      return `<tr class="${isRec ? 'recommended-row' : ''}"><td>${s.strike}${badge}</td><td>${(s.oi / 100000).toFixed(1)}L</td></tr>`;
+    }).join('');
     return `
       <div class="oc-expiry">
         <h3>${label} — expiry ${data.expiry}</h3>
@@ -261,11 +281,11 @@ function renderOptionChain(oc) {
         <div class="oc-cols">
           <div>
             <h4>Support (Put OI)</h4>
-            <table><thead><tr><th>Strike</th><th>OI</th></tr></thead><tbody>${rowsFor(data.support)}</tbody></table>
+            <table><thead><tr><th>Strike</th><th>OI</th></tr></thead><tbody>${rowsFor(data.support, 'support')}</tbody></table>
           </div>
           <div>
             <h4>Resistance (Call OI)</h4>
-            <table><thead><tr><th>Strike</th><th>OI</th></tr></thead><tbody>${rowsFor(data.resistance)}</tbody></table>
+            <table><thead><tr><th>Strike</th><th>OI</th></tr></thead><tbody>${rowsFor(data.resistance, 'resistance')}</tbody></table>
           </div>
         </div>
       </div>`;
@@ -274,7 +294,7 @@ function renderOptionChain(oc) {
   el.innerHTML =
     renderExpiry('Current month', oc.current_month) +
     renderExpiry('Next month', oc.next_month) +
-    `<p class="note">PCR and Max Pain are informational, not predictive — high open-interest strikes tend to act as rough support/resistance, especially near expiry. Not financial advice.</p>`;
+    `<p class="note">PCR and Max Pain are informational, not predictive — high open-interest strikes tend to act as rough support/resistance, especially near expiry. The "Buy" badge marks the strike the current Trade Signal points to (only shown when price trend and option-chain bias agree) — not financial advice.</p>`;
 }
 
 async function init() {
@@ -288,7 +308,7 @@ async function init() {
     loadJSONOptional('data/trade_signal.json'),
   ]);
 
-  renderOptionChain(optionChain);
+  renderOptionChain(optionChain, tradeSignal);
   renderTradeSignal(tradeSignal);
 
   document.getElementById('asof').textContent = 'As of ' + status.current_snapshot.month;
