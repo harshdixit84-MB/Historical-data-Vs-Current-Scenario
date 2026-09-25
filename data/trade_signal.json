@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T06:54:11.036884+00:00",
+  "generated_at": "2026-09-25T12:34:20.058206+00:00",
   "spot_reference": 23063.1,
   "spot_reference_note": "Last available daily close (not intraday) \u2014 see project notes.",
   "price_side": {
@@ -15,19 +15,19 @@
     "expiry": "29SEP2026",
     "days_to_expiry": 4,
     "high_decay_risk": false,
-    "pcr": 0.85,
+    "pcr": 0.92,
     "option_chain_bias": "Neutral",
-    "option_chain_confidence": 49,
-    "max_pain": 23200,
+    "option_chain_confidence": 45,
+    "max_pain": 23250,
     "candidate_pe_strike": {
-      "strike": 23050,
-      "oi": 11256765,
-      "change_oi": 8465925
+      "strike": 23000,
+      "oi": 14607435,
+      "change_oi": -6351090
     },
     "candidate_ce_strike": {
-      "strike": 23100,
-      "oi": 18963295,
-      "change_oi": 11893635
+      "strike": 23300,
+      "oi": 9901905,
+      "change_oi": -5818670
     }
   },
   "next_month": {
@@ -36,19 +36,19 @@
     "expiry": "27OCT2026",
     "days_to_expiry": 32,
     "high_decay_risk": false,
-    "pcr": 1.07,
+    "pcr": 1.09,
     "option_chain_bias": "Neutral",
-    "option_chain_confidence": 44,
+    "option_chain_confidence": 45,
     "max_pain": 23500,
     "candidate_pe_strike": {
       "strike": 23000,
-      "oi": 4853225,
-      "change_oi": 390975
+      "oi": 4789785,
+      "change_oi": -63440
     },
     "candidate_ce_strike": {
       "strike": 23300,
-      "oi": 2625545,
-      "change_oi": 159445
+      "oi": 2713880,
+      "change_oi": 88335
     }
   },
   "primary_expiry_used": "Current month",
