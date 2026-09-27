@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T15:47:19.123116+00:00",
+  "generated_at": "2026-09-27T06:48:22.120354+00:00",
   "spot_reference": 23140.5,
   "spot_reference_note": "Last available daily close (not intraday) \u2014 see project notes.",
   "price_side": {
@@ -13,28 +13,28 @@
     "label": "Current month",
     "available": true,
     "expiry": "29SEP2026",
-    "days_to_expiry": 4,
-    "high_decay_risk": false,
-    "pcr": 0.92,
+    "days_to_expiry": 2,
+    "high_decay_risk": true,
+    "pcr": 0.93,
     "option_chain_bias": "Neutral",
-    "option_chain_confidence": 45,
+    "option_chain_confidence": 44,
     "max_pain": 23250,
     "candidate_pe_strike": {
       "strike": 23100,
-      "oi": 11453000,
-      "change_oi": 0
+      "oi": 10946390,
+      "change_oi": -506610
     },
     "candidate_ce_strike": {
       "strike": 23300,
-      "oi": 9901905,
-      "change_oi": 0
+      "oi": 9673105,
+      "change_oi": -228800
     }
   },
   "next_month": {
     "label": "Next month",
     "available": true,
     "expiry": "27OCT2026",
-    "days_to_expiry": 32,
+    "days_to_expiry": 30,
     "high_decay_risk": false,
     "pcr": 1.09,
     "option_chain_bias": "Neutral",
@@ -42,16 +42,16 @@
     "max_pain": 23500,
     "candidate_pe_strike": {
       "strike": 23000,
-      "oi": 4789785,
-      "change_oi": 0
+      "oi": 4766580,
+      "change_oi": -23205
     },
     "candidate_ce_strike": {
       "strike": 23300,
-      "oi": 2713880,
-      "change_oi": 0
+      "oi": 2711800,
+      "change_oi": -2080
     }
   },
-  "primary_expiry_used": "Current month",
+  "primary_expiry_used": "Next month",
   "signal": {
     "signal": "No clear trade",
     "reason": "Price-trend signal is Bearish and option-chain signal is Neutral \u2014 at least one side isn't showing a clear lean, so the two aren't confirming each other."
