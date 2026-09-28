@@ -1,12 +1,12 @@
 {
   "current_snapshot": {
     "month": "2026-09-30",
-    "RSI6": 34.64,
-    "RSI14": 45.51,
-    "MACD_hist_pct": -1.659,
-    "Price_vs_MAlong_pct": -5.72,
-    "pct_off_high": -13.06,
-    "pct_above_low": 2.01
+    "RSI6": 37.44,
+    "RSI14": 47.12,
+    "MACD_hist_pct": -1.534,
+    "Price_vs_MAlong_pct": -4.37,
+    "pct_off_high": -11.69,
+    "pct_above_low": 3.62
   },
   "nearest_analogs": [
     {
@@ -14,7 +14,7 @@
       "phase_id": 5,
       "type": "Bull",
       "start_month": "2011-12-31",
-      "distance": 0.803,
+      "distance": 0.975,
       "followed_by_type": "Bull",
       "followed_by_duration_months": 38,
       "followed_by_pct_move": 91.26,
@@ -25,7 +25,7 @@
       "phase_id": 7,
       "type": "Bull",
       "start_month": "2016-02-29",
-      "distance": 0.998,
+      "distance": 1.21,
       "followed_by_type": "Bull",
       "followed_by_duration_months": 46,
       "followed_by_pct_move": 74.16,
@@ -33,14 +33,14 @@
     },
     {
       "rank": 3,
-      "phase_id": 9,
-      "type": "Bull",
-      "start_month": "2020-03-31",
-      "distance": 1.97,
-      "followed_by_type": "Bull",
-      "followed_by_duration_months": 68,
-      "followed_by_pct_move": 204.77,
-      "followed_by_end_month": "2025-11-30"
+      "phase_id": 8,
+      "type": "Bear",
+      "start_month": "2019-12-31",
+      "distance": 2.155,
+      "followed_by_type": "Bear",
+      "followed_by_duration_months": 3,
+      "followed_by_pct_move": -29.34,
+      "followed_by_end_month": "2020-03-31"
     }
   ],
   "current_phase": {
@@ -61,7 +61,7 @@
   },
   "projection": {
     "as_of_date": "2026-09-28",
-    "latest_close": 22780.25,
+    "latest_close": NaN,
     "current_phase_type": "Bull",
     "current_phase_start": "2020-03-31",
     "current_phase_elapsed_months": 68,
@@ -71,7 +71,7 @@
     "downside_confirmed_bear_pct_from_peak": -20.0,
     "downside_correction_watch_level": 23695.7,
     "downside_correction_watch_pct_from_peak": -10.0,
-    "current_ma10": 24161.56,
+    "current_ma10": 24197.59,
     "historical_top_extension_pct": {
       "min": 4.23,
       "median": 8.75,
@@ -79,32 +79,32 @@
       "n_historical_tops": 3
     },
     "upside_target_zone": {
-      "low": 25183.59,
-      "median": 26275.7,
-      "high": 26589.8
+      "low": 25221.14,
+      "median": 26314.87,
+      "high": 26629.44
     },
-    "current_extension_pct_above_ma10": -5.72,
-    "current_ma_short": 23748.08,
+    "current_extension_pct_above_ma10": NaN,
+    "current_ma_short": 23868.17,
     "short_below_long_ma": true,
     "ma_cross_date": "2026-03-31",
     "months_since_ma_cross": 6,
     "downside_watch_signals": {
-      "price_vs_ma_short_pct": -4.08,
-      "rsi6": 34.64,
-      "macd_hist_pct": -1.659
+      "price_vs_ma_short_pct": NaN,
+      "rsi6": 37.44,
+      "macd_hist_pct": -1.534
     },
     "downside_confirmation_tiers": [
       {
         "tier": 1,
         "label": "Price below its own short-term (3-month) average",
-        "level": 23748.08,
-        "already_true": true
+        "level": 23868.17,
+        "already_true": false
       },
       {
         "tier": 2,
         "label": "Price below its own long-term (10-month) average",
-        "level": 24161.56,
-        "already_true": true
+        "level": 24197.59,
+        "already_true": false
       },
       {
         "tier": 3,
@@ -117,13 +117,13 @@
       {
         "tier": 1,
         "label": "Price reclaims its short-term (3-month) average",
-        "level": 23748.08,
+        "level": 23868.17,
         "already_true": false
       },
       {
         "tier": 2,
         "label": "Price reclaims its long-term (10-month) average",
-        "level": 24161.56,
+        "level": 24197.59,
         "already_true": false
       },
       {
