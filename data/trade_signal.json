@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T16:05:54.866939+00:00",
+  "generated_at": "2026-09-28T16:07:02.653292+00:00",
   "spot_reference": 22780.25,
   "spot_reference_note": "Last available daily close (not intraday) \u2014 see project notes.",
   "price_side": {
@@ -22,12 +22,12 @@
     "candidate_pe_strike": {
       "strike": 22700,
       "oi": 9765405,
-      "change_oi": -3439540
+      "change_oi": 0
     },
     "candidate_ce_strike": {
       "strike": 23000,
       "oi": 21177975,
-      "change_oi": -8931000
+      "change_oi": 0
     }
   },
   "next_month": {
@@ -43,12 +43,12 @@
     "candidate_pe_strike": {
       "strike": 22500,
       "oi": 3704480,
-      "change_oi": 47580
+      "change_oi": 0
     },
     "candidate_ce_strike": {
       "strike": 23000,
       "oi": 3901235,
-      "change_oi": 811590
+      "change_oi": 0
     }
   },
   "primary_expiry_used": "Next month",
