@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-09-28T18:34:05.304258+00:00",
-  "spot_reference": NaN,
+  "generated_at": "2026-09-29T03:55:48.335422+00:00",
+  "spot_reference": 22667.95,
   "spot_reference_note": "Last available daily close (not intraday) \u2014 see project notes.",
   "price_side": {
-    "lean": "Neutral",
-    "downside_tiers_active": 0,
+    "lean": "Bearish",
+    "downside_tiers_active": 2,
     "downside_tiers_total": 3,
     "upside_tiers_active": 0,
     "upside_tiers_total": 3
@@ -13,47 +13,47 @@
     "label": "Current month",
     "available": true,
     "expiry": "29SEP2026",
-    "days_to_expiry": 1,
+    "days_to_expiry": 0,
     "high_decay_risk": true,
-    "pcr": 0.62,
+    "pcr": 0.69,
     "option_chain_bias": "Bearish",
-    "option_chain_confidence": 63,
-    "max_pain": 22950,
+    "option_chain_confidence": 59,
+    "max_pain": 22800,
     "candidate_pe_strike": {
-      "strike": 22000,
-      "oi": 13946465,
-      "change_oi": 0
+      "strike": 22650,
+      "oi": 14387945,
+      "change_oi": 9760465
     },
     "candidate_ce_strike": {
-      "strike": 23000,
-      "oi": 21177975,
-      "change_oi": 0
+      "strike": 22800,
+      "oi": 17620785,
+      "change_oi": 5749640
     }
   },
   "next_month": {
     "label": "Next month",
     "available": true,
     "expiry": "27OCT2026",
-    "days_to_expiry": 29,
+    "days_to_expiry": 28,
     "high_decay_risk": false,
-    "pcr": 1.09,
+    "pcr": 1.07,
     "option_chain_bias": "Neutral",
-    "option_chain_confidence": 45,
+    "option_chain_confidence": 44,
     "max_pain": 23500,
     "candidate_pe_strike": {
-      "strike": 23500,
-      "oi": 6437340,
-      "change_oi": 0
+      "strike": 22500,
+      "oi": 3557515,
+      "change_oi": -146965
     },
     "candidate_ce_strike": {
-      "strike": 23500,
-      "oi": 7721415,
-      "change_oi": 0
+      "strike": 23000,
+      "oi": 3934125,
+      "change_oi": 32890
     }
   },
   "primary_expiry_used": "Next month",
   "signal": {
     "signal": "No clear trade",
-    "reason": "Price-trend signal is Neutral and option-chain signal is Neutral \u2014 at least one side isn't showing a clear lean, so the two aren't confirming each other."
+    "reason": "Price-trend signal is Bearish and option-chain signal is Neutral \u2014 at least one side isn't showing a clear lean, so the two aren't confirming each other."
   }
 }
