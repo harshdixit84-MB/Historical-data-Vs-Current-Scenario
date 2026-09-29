@@ -41,6 +41,12 @@ def load_price_data():
     df = pd.read_csv(NIFTY_CSV, index_col="Date", parse_dates=True)
     df = df.sort_index()
     df = df[~df.index.duplicated(keep="first")]
+    # Safety net: never let a malformed row (blank Close) reach anything
+    # downstream, even if it somehow got into the CSV.
+    bad = df[df["Close"].isna()]
+    if not bad.empty:
+        print(f"[WARN] load_price_data: dropping {len(bad)} row(s) with no Close: {list(bad.index.date)}")
+        df = df[df["Close"].notna()]
     return df
 
 

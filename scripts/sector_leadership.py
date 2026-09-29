@@ -43,6 +43,7 @@ def load_monthly_close(path):
     df = pd.read_csv(path, index_col="Date", parse_dates=True)
     df = df.sort_index()
     df = df[~df.index.duplicated(keep="first")]
+    df = df[df["Close"].notna()]  # drop any malformed row before resampling
     monthly_close = df["Close"].resample("ME").last().dropna()
     return monthly_close
 

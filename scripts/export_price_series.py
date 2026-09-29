@@ -9,6 +9,7 @@ NIFTY_CSV = os.path.join(DATA_DIR, "nifty50.csv")
 
 def main():
     df = pd.read_csv(NIFTY_CSV, index_col="Date", parse_dates=True)
+    df = df[df["Close"].notna()]  # drop any malformed row before resampling
     monthly = df["Close"].resample("ME").last().dropna()
     out = [{"month": str(d.date()), "close": round(float(v), 2)} for d, v in monthly.items()]
     with open(os.path.join(DATA_DIR, "nifty_monthly_close.json"), "w") as f:

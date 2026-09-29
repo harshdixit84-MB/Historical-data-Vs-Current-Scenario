@@ -50,6 +50,18 @@ def fetch_one(ticker: str) -> pd.DataFrame:
     if isinstance(df.columns, pd.MultiIndex):
         df.columns = [c[0] for c in df.columns]
     df.index.name = "Date"
+
+    # Yahoo occasionally returns a malformed trailing candle (Open/High/Low
+    # present but Close blank, Volume 0) — usually the most recent day, if
+    # their backend hadn't finished finalizing it at fetch time. Drop any
+    # row with no Close rather than let a NaN silently poison every script
+    # that reads this file downstream.
+    bad_rows = df[df["Close"].isna()]
+    if not bad_rows.empty:
+        print(f"  [WARN] Dropping {len(bad_rows)} malformed row(s) with no Close: "
+              f"{list(bad_rows.index.date)}")
+        df = df[df["Close"].notna()]
+
     return df
 
 
