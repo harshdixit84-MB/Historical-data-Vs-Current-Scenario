@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-29T03:54:53.387834Z",
+  "fetched_at": "2026-09-29T03:58:28.613402Z",
   "current_month": {
     "symbol": "NIFTY",
     "expiry": "29SEP2026",
@@ -13,62 +13,62 @@
       "03NOV2026"
     ],
     "spot_price": null,
-    "pcr": 0.69,
+    "pcr": 0.67,
     "bias": "Bearish",
-    "confidence": 59,
+    "confidence": 60,
     "max_pain": 22800,
     "support": [
       {
         "strike": 22700,
-        "oi": 18892055,
-        "change_oi": 9126650
+        "oi": 16651635,
+        "change_oi": -2240420
       },
       {
         "strike": 22500,
-        "oi": 16204240,
-        "change_oi": 5086445
+        "oi": 16516955,
+        "change_oi": 312715
       },
       {
         "strike": 22000,
-        "oi": 15892695,
-        "change_oi": 1946230
+        "oi": 16209895,
+        "change_oi": 317200
       },
       {
         "strike": 22600,
-        "oi": 15206165,
-        "change_oi": 6757205
+        "oi": 14888900,
+        "change_oi": -317265
       },
       {
         "strike": 22650,
-        "oi": 14387945,
-        "change_oi": 9760465
+        "oi": 13566475,
+        "change_oi": -821470
       }
     ],
     "resistance": [
       {
         "strike": 23000,
-        "oi": 23499255,
-        "change_oi": 2321280
-      },
-      {
-        "strike": 23500,
-        "oi": 17716855,
-        "change_oi": 949650
+        "oi": 23650510,
+        "change_oi": 151255
       },
       {
         "strike": 22800,
-        "oi": 17620785,
-        "change_oi": 5749640
+        "oi": 18357690,
+        "change_oi": 736905
+      },
+      {
+        "strike": 23500,
+        "oi": 17921215,
+        "change_oi": 204360
+      },
+      {
+        "strike": 22700,
+        "oi": 17750070,
+        "change_oi": 2976805
       },
       {
         "strike": 22900,
-        "oi": 15347410,
-        "change_oi": 2027025
-      },
-      {
-        "strike": 24000,
-        "oi": 14943955,
-        "change_oi": -2928185
+        "oi": 15931630,
+        "change_oi": 584220
       }
     ],
     "expected_range": {
@@ -76,10 +76,10 @@
       "high": null
     },
     "narrative": [
-      "Heavy Put writing at 22700 \u2014 support strengthening.",
+      "Put unwinding at 22700 \u2014 support weakening.",
       "Call writers defending 23000."
     ],
-    "verdict": "Bearish bias (PCR 0.69). Max Pain sits at 22800.",
+    "verdict": "Bearish bias (PCR 0.67). Max Pain sits at 22800.",
     "is_first_check": false
   },
   "next_month": {
@@ -102,55 +102,55 @@
     "support": [
       {
         "strike": 23500,
-        "oi": 6417645,
-        "change_oi": -19695
+        "oi": 6414655,
+        "change_oi": -2990
       },
       {
         "strike": 23000,
-        "oi": 6059170,
-        "change_oi": -85865
+        "oi": 6089785,
+        "change_oi": 30615
       },
       {
         "strike": 22500,
-        "oi": 3557515,
-        "change_oi": -146965
+        "oi": 3462030,
+        "change_oi": -95485
       },
       {
         "strike": 22000,
-        "oi": 3267745,
-        "change_oi": 5720
+        "oi": 3271710,
+        "change_oi": 3965
       },
       {
         "strike": 23300,
-        "oi": 2940470,
-        "change_oi": -19240
+        "oi": 2937545,
+        "change_oi": -2925
       }
     ],
     "resistance": [
       {
         "strike": 23500,
-        "oi": 7876310,
-        "change_oi": 154895
+        "oi": 7932210,
+        "change_oi": 55900
       },
       {
         "strike": 24000,
-        "oi": 5389735,
-        "change_oi": 23205
+        "oi": 5397665,
+        "change_oi": 7930
       },
       {
         "strike": 23000,
-        "oi": 3934125,
-        "change_oi": 32890
+        "oi": 3976115,
+        "change_oi": 41990
       },
       {
         "strike": 23300,
-        "oi": 2885740,
-        "change_oi": -6565
+        "oi": 2897505,
+        "change_oi": 11765
       },
       {
         "strike": 25000,
-        "oi": 2570295,
-        "change_oi": 30030
+        "oi": 2568930,
+        "change_oi": -1365
       }
     ],
     "expected_range": {
