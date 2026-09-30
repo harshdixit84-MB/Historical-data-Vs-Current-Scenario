@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-30T09:19:32.076999Z",
+  "fetched_at": "2026-09-30T16:01:51.694608Z",
   "current_month": {
     "symbol": "NIFTY",
     "expiry": "27OCT2026",
@@ -20,55 +20,55 @@
     "support": [
       {
         "strike": 23000,
-        "oi": 6307015,
-        "change_oi": 188370
+        "oi": 6312735,
+        "change_oi": 5720
       },
       {
         "strike": 23500,
-        "oi": 6267820,
-        "change_oi": -30420
+        "oi": 6243510,
+        "change_oi": -24310
       },
       {
         "strike": 22000,
-        "oi": 3819400,
-        "change_oi": 356135
+        "oi": 3879785,
+        "change_oi": 60385
       },
       {
         "strike": 22500,
-        "oi": 3456700,
-        "change_oi": 81640
+        "oi": 3463005,
+        "change_oi": 6305
       },
       {
         "strike": 24000,
-        "oi": 2968940,
-        "change_oi": 93275
+        "oi": 2965560,
+        "change_oi": -3380
       }
     ],
     "resistance": [
       {
         "strike": 23500,
-        "oi": 9106305,
-        "change_oi": 558155
+        "oi": 9010430,
+        "change_oi": -95875
       },
       {
         "strike": 24000,
-        "oi": 6339515,
-        "change_oi": 576420
+        "oi": 6396130,
+        "change_oi": 56615
       },
       {
         "strike": 23000,
-        "oi": 5384925,
-        "change_oi": 330395
+        "oi": 5449470,
+        "change_oi": 64545
       },
       {
         "strike": 23300,
-        "oi": 3238625,
-        "change_oi": 243295
+        "oi": 3214640,
+        "change_oi": -23985
       },
       {
         "strike": 25000,
-        "oi": 2995980,
-        "change_oi": -64220
+        "oi": 2960685,
+        "change_oi": -35295
       }
     ],
     "expected_range": {
@@ -77,7 +77,7 @@
     },
     "narrative": [
       "Heavy Put writing at 23000 \u2014 support strengthening.",
-      "Call writers defending 23500."
+      "Call OI decreasing at 23500 \u2014 resistance weakening."
     ],
     "verdict": "Neutral bias (PCR 1.02). Max Pain sits at 23400.",
     "is_first_check": false
@@ -102,55 +102,55 @@
     "support": [
       {
         "strike": 22500,
-        "oi": 1371500,
-        "change_oi": null
+        "oi": 1368640,
+        "change_oi": -2860
       },
       {
         "strike": 22000,
-        "oi": 1163500,
-        "change_oi": null
+        "oi": 1160965,
+        "change_oi": -2535
       },
       {
         "strike": 23000,
-        "oi": 1030445,
-        "change_oi": null
+        "oi": 1015950,
+        "change_oi": -14495
       },
       {
         "strike": 21500,
-        "oi": 709995,
-        "change_oi": null
+        "oi": 741130,
+        "change_oi": 31135
       },
       {
         "strike": 21000,
-        "oi": 621530,
-        "change_oi": null
+        "oi": 629655,
+        "change_oi": 8125
       }
     ],
     "resistance": [
       {
         "strike": 24000,
-        "oi": 1232790,
-        "change_oi": null
+        "oi": 1249495,
+        "change_oi": 16705
       },
       {
         "strike": 25000,
-        "oi": 1156610,
-        "change_oi": null
+        "oi": 1155440,
+        "change_oi": -1170
       },
       {
         "strike": 23500,
-        "oi": 918515,
-        "change_oi": null
+        "oi": 908375,
+        "change_oi": -10140
       },
       {
         "strike": 23000,
-        "oi": 767845,
-        "change_oi": null
+        "oi": 766480,
+        "change_oi": -1365
       },
       {
         "strike": 24500,
-        "oi": 761540,
-        "change_oi": null
+        "oi": 759850,
+        "change_oi": -1690
       }
     ],
     "expected_range": {
@@ -158,10 +158,11 @@
       "high": null
     },
     "narrative": [
-      "First check for this stock's option chain \u2014 check again later to see how positioning is shifting over time."
+      "Put unwinding at 22500 \u2014 support weakening.",
+      "Call writers defending 24000."
     ],
     "verdict": "Neutral bias (PCR 1.08). Max Pain sits at 23400.",
-    "is_first_check": true
+    "is_first_check": false
   },
   "errors": []
 }
