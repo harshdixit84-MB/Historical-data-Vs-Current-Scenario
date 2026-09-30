@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T16:51:41.941949+00:00",
+  "generated_at": "2026-09-30T09:20:26.945631+00:00",
   "spot_reference": 22716.2,
   "spot_reference_note": "Last available daily close (not intraday) \u2014 see project notes.",
   "price_side": {
@@ -12,46 +12,46 @@
   "current_month": {
     "label": "Current month",
     "available": true,
-    "expiry": "29SEP2026",
-    "days_to_expiry": 0,
-    "high_decay_risk": true,
-    "pcr": 0.86,
+    "expiry": "27OCT2026",
+    "days_to_expiry": 27,
+    "high_decay_risk": false,
+    "pcr": 1.02,
     "option_chain_bias": "Neutral",
-    "option_chain_confidence": 48,
-    "max_pain": 22750,
+    "option_chain_confidence": 41,
+    "max_pain": 23400,
     "candidate_pe_strike": {
-      "strike": 22700,
-      "oi": 20374835,
-      "change_oi": 0
+      "strike": 22500,
+      "oi": 3456700,
+      "change_oi": 81640
     },
     "candidate_ce_strike": {
-      "strike": 22750,
-      "oi": 12537330,
-      "change_oi": 0
+      "strike": 23000,
+      "oi": 5384925,
+      "change_oi": 330395
     }
   },
   "next_month": {
     "label": "Next month",
     "available": true,
-    "expiry": "27OCT2026",
-    "days_to_expiry": 28,
+    "expiry": "23NOV2026",
+    "days_to_expiry": 54,
     "high_decay_risk": false,
-    "pcr": 1.04,
+    "pcr": 1.08,
     "option_chain_bias": "Neutral",
-    "option_chain_confidence": 42,
-    "max_pain": 23500,
+    "option_chain_confidence": 45,
+    "max_pain": 23400,
     "candidate_pe_strike": {
       "strike": 22500,
-      "oi": 3375060,
-      "change_oi": 0
+      "oi": 1371500,
+      "change_oi": null
     },
     "candidate_ce_strike": {
       "strike": 23000,
-      "oi": 5054530,
-      "change_oi": 0
+      "oi": 767845,
+      "change_oi": null
     }
   },
-  "primary_expiry_used": "Next month",
+  "primary_expiry_used": "Current month",
   "signal": {
     "signal": "No clear trade",
     "reason": "Price-trend signal is Bearish and option-chain signal is Neutral \u2014 at least one side isn't showing a clear lean, so the two aren't confirming each other."
