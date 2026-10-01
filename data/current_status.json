@@ -1,12 +1,12 @@
 {
   "current_snapshot": {
-    "month": "2026-09-30",
-    "RSI6": 33.52,
-    "RSI14": 44.82,
-    "MACD_hist_pct": -1.716,
-    "Price_vs_MAlong_pct": -6.32,
-    "pct_off_high": -13.67,
-    "pct_above_low": 1.29
+    "month": "2026-10-31",
+    "RSI6": 31.99,
+    "RSI14": 43.94,
+    "MACD_hist_pct": -1.92,
+    "Price_vs_MAlong_pct": -5.69,
+    "pct_off_high": -14.43,
+    "pct_above_low": 0.41
   },
   "nearest_analogs": [
     {
@@ -14,7 +14,7 @@
       "phase_id": 5,
       "type": "Bull",
       "start_month": "2011-12-31",
-      "distance": 0.739,
+      "distance": 0.705,
       "followed_by_type": "Bull",
       "followed_by_duration_months": 38,
       "followed_by_pct_move": 91.26,
@@ -25,7 +25,7 @@
       "phase_id": 7,
       "type": "Bull",
       "start_month": "2016-02-29",
-      "distance": 0.912,
+      "distance": 0.833,
       "followed_by_type": "Bull",
       "followed_by_duration_months": 46,
       "followed_by_pct_move": 74.16,
@@ -36,7 +36,7 @@
       "phase_id": 9,
       "type": "Bull",
       "start_month": "2020-03-31",
-      "distance": 1.884,
+      "distance": 1.828,
       "followed_by_type": "Bull",
       "followed_by_duration_months": 68,
       "followed_by_pct_move": 204.77,
@@ -60,8 +60,8 @@
     "duration_percentile": 100.0
   },
   "projection": {
-    "as_of_date": "2026-09-30",
-    "latest_close": 22620.45,
+    "as_of_date": "2026-10-01",
+    "latest_close": 22421.95,
     "current_phase_type": "Bull",
     "current_phase_start": "2020-03-31",
     "current_phase_elapsed_months": 68,
@@ -71,7 +71,7 @@
     "downside_confirmed_bear_pct_from_peak": -20.0,
     "downside_correction_watch_level": 23695.7,
     "downside_correction_watch_pct_from_peak": -10.0,
-    "current_ma10": 24145.58,
+    "current_ma10": 23774.82,
     "historical_top_extension_pct": {
       "min": 4.23,
       "median": 8.75,
@@ -79,31 +79,31 @@
       "n_historical_tops": 3
     },
     "upside_target_zone": {
-      "low": 25166.94,
-      "median": 26258.32,
-      "high": 26572.21
+      "low": 24780.49,
+      "median": 25855.11,
+      "high": 26164.18
     },
-    "current_extension_pct_above_ma10": -6.32,
-    "current_ma_short": 23694.82,
+    "current_extension_pct_above_ma10": -5.69,
+    "current_ma_short": 23040.93,
     "short_below_long_ma": true,
     "ma_cross_date": "2026-03-31",
-    "months_since_ma_cross": 6,
+    "months_since_ma_cross": 7,
     "downside_watch_signals": {
-      "price_vs_ma_short_pct": -4.53,
-      "rsi6": 33.52,
-      "macd_hist_pct": -1.716
+      "price_vs_ma_short_pct": -2.69,
+      "rsi6": 31.99,
+      "macd_hist_pct": -1.92
     },
     "downside_confirmation_tiers": [
       {
         "tier": 1,
         "label": "Price below its own short-term (3-month) average",
-        "level": 23694.82,
+        "level": 23040.93,
         "already_true": true
       },
       {
         "tier": 2,
         "label": "Price below its own long-term (10-month) average",
-        "level": 24145.58,
+        "level": 23774.82,
         "already_true": true
       },
       {
@@ -117,13 +117,13 @@
       {
         "tier": 1,
         "label": "Price reclaims its short-term (3-month) average",
-        "level": 23694.82,
+        "level": 23040.93,
         "already_true": false
       },
       {
         "tier": 2,
         "label": "Price reclaims its long-term (10-month) average",
-        "level": 24145.58,
+        "level": 23774.82,
         "already_true": false
       },
       {
