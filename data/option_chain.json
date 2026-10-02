@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-01T17:19:40.381220Z",
+  "fetched_at": "2026-10-02T09:22:33.525716Z",
   "current_month": {
     "symbol": "NIFTY",
     "expiry": "27OCT2026",
@@ -13,62 +13,62 @@
       "23NOV2026"
     ],
     "spot_price": null,
-    "pcr": 0.99,
+    "pcr": 0.96,
     "bias": "Neutral",
-    "confidence": 41,
+    "confidence": 42,
     "max_pain": 23300,
     "support": [
       {
-        "strike": 23000,
-        "oi": 5901415,
-        "change_oi": 0
+        "strike": 23500,
+        "oi": 5828680,
+        "change_oi": -32305
       },
       {
-        "strike": 23500,
-        "oi": 5860985,
-        "change_oi": 0
+        "strike": 23000,
+        "oi": 5116800,
+        "change_oi": -784615
       },
       {
         "strike": 22000,
-        "oi": 4446780,
-        "change_oi": 0
+        "oi": 4446195,
+        "change_oi": -585
       },
       {
         "strike": 22500,
-        "oi": 3795220,
-        "change_oi": 0
+        "oi": 3562715,
+        "change_oi": -232505
       },
       {
         "strike": 21500,
-        "oi": 3044405,
-        "change_oi": 0
+        "oi": 3036540,
+        "change_oi": -7865
       }
     ],
     "resistance": [
       {
         "strike": 23500,
-        "oi": 9108190,
-        "change_oi": 0
-      },
-      {
-        "strike": 24000,
-        "oi": 6394765,
-        "change_oi": 0
+        "oi": 9033180,
+        "change_oi": -75010
       },
       {
         "strike": 23000,
-        "oi": 6322420,
-        "change_oi": 0
+        "oi": 6314360,
+        "change_oi": -8060
+      },
+      {
+        "strike": 24000,
+        "oi": 6211855,
+        "change_oi": -182910
       },
       {
         "strike": 23300,
-        "oi": 3468790,
-        "change_oi": 0
+        "oi": 3455010,
+        "change_oi": -13780
       },
       {
         "strike": 25000,
-        "oi": 3051620,
-        "change_oi": 0
+        "oi": 3050710,
+        "change_oi": -910
       }
     ],
     "expected_range": {
@@ -76,9 +76,10 @@
       "high": null
     },
     "narrative": [
-      "No significant OI shift detected since the last check."
+      "Put unwinding at 23500 \u2014 support weakening.",
+      "Call OI decreasing at 23500 \u2014 resistance weakening."
     ],
-    "verdict": "Neutral bias (PCR 0.99). Max Pain sits at 23300.",
+    "verdict": "Neutral bias (PCR 0.96). Max Pain sits at 23300.",
     "is_first_check": false
   },
   "next_month": {
@@ -94,62 +95,62 @@
       "23NOV2026"
     ],
     "spot_price": null,
-    "pcr": 0.9,
+    "pcr": 0.89,
     "bias": "Neutral",
-    "confidence": 46,
+    "confidence": 47,
     "max_pain": 23150,
     "support": [
       {
         "strike": 22500,
-        "oi": 1542385,
-        "change_oi": 0
+        "oi": 1514110,
+        "change_oi": -28275
       },
       {
         "strike": 22000,
-        "oi": 1204710,
-        "change_oi": 0
+        "oi": 1189500,
+        "change_oi": -15210
       },
       {
         "strike": 23000,
-        "oi": 998335,
-        "change_oi": 0
+        "oi": 989690,
+        "change_oi": -8645
       },
       {
         "strike": 21500,
-        "oi": 783250,
-        "change_oi": 0
+        "oi": 778050,
+        "change_oi": -5200
       },
       {
         "strike": 21000,
-        "oi": 737165,
-        "change_oi": 0
+        "oi": 718835,
+        "change_oi": -18330
       }
     ],
     "resistance": [
       {
         "strike": 24000,
-        "oi": 1850485,
-        "change_oi": 0
+        "oi": 1841515,
+        "change_oi": -8970
       },
       {
         "strike": 25000,
-        "oi": 1128595,
-        "change_oi": 0
+        "oi": 1128335,
+        "change_oi": -260
       },
       {
         "strike": 23000,
-        "oi": 1105910,
-        "change_oi": 0
+        "oi": 1102725,
+        "change_oi": -3185
       },
       {
         "strike": 23500,
-        "oi": 1021930,
-        "change_oi": 0
+        "oi": 1010295,
+        "change_oi": -11635
       },
       {
         "strike": 24500,
-        "oi": 855985,
-        "change_oi": 0
+        "oi": 843895,
+        "change_oi": -12090
       }
     ],
     "expected_range": {
@@ -157,9 +158,10 @@
       "high": null
     },
     "narrative": [
-      "No significant OI shift detected since the last check."
+      "Put unwinding at 22500 \u2014 support weakening.",
+      "Call OI decreasing at 24000 \u2014 resistance weakening."
     ],
-    "verdict": "Neutral bias (PCR 0.90). Max Pain sits at 23150.",
+    "verdict": "Neutral bias (PCR 0.89). Max Pain sits at 23150.",
     "is_first_check": false
   },
   "errors": []
